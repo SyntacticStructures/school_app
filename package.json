@@ -1,0 +1,12 @@
+{
+  "name": "School_app",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "latest",
+    "ejs": "^2.3.3",
+    "express": "~4.2.0",
+    "express-session": "^1.11.3",
+    "mongoose": "^4.1.9",
+    "mysql": "^2.9.0"
+  }
+}

@@ -1,0 +1,5 @@
+<div ng-init="uc.getCurrentUser()">
+	<h1>Welcome</h1>
+	<p>{{uc.current_user}}</p>
+	<label> Search for Friends: <input type="text" ng-change="uc.searchTextField()" ng-model="uc.search_text.user_search"></label>
+</div>

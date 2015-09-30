@@ -1,0 +1,15 @@
+	<h2>Log In</h2>
+	<form name='user'>
+		<label>Email: <input type="text" name="email" ng-model="uc.user.email"></label>
+		<label>Password: <input type="text" name="password" ng-model="uc.user.password"></label>
+		<input type="submit" ng-click='uc.loginUser()'>
+	</form>
+	</form>
+	<h2>Create User</h2>
+	<form name='new_user'>
+		<label>First Name: <input type="text" name="first_name" ng-model='uc.new_user.first_name'></label>
+		<label>Last Name: <input type="text" name="last_name" ng-model='uc.new_user.last_name'></label>
+		<label>Email: <input type="text" name="email" ng-model='uc.new_user.email'></label>
+		<label>Password: <input type="password" name="password" ng-model='uc.new_user.password'></label>
+		<input type="submit" ng-click='uc.addUser()'>
+	</form>
