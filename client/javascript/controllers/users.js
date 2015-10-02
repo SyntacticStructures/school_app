@@ -2,7 +2,7 @@ myApp.controller('UsersController', function(UserFactory, $location, $scope) {
 	
 	var that = this;
 
-	// for checking whether it's a searchable name. I should put this elsewhere.
+	// for checking whether it's a searchable name. I should put this elsewhere. Modularize, especially if you have multiple helper functions;
 	isSearchable = function(text) {
 		var regex = /^[a-z ,.'-]+$/i;
 		return regex.test(text);
@@ -36,7 +36,7 @@ myApp.controller('UsersController', function(UserFactory, $location, $scope) {
 		console.log(that.search_text.user_search, "search text");
 		if ( isSearchable(that.search_text.user_search) ){
 			UserFactory.getUserByFirstName(that.search_text, function(callback) {
-				console.log(callback);
+				that.search_results = callback;
 			});
 		}
 	},

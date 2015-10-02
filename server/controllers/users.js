@@ -99,16 +99,27 @@ module.exports = (function() {
         },
         // here is where the live search by name takes place 
         findOneByName: function(req, res) {
-            // connection.query("SELECT * FROM users WHERE users.first_name = " + "'" + req.body.user_search + "'" + "OR users.last_name = " + "'" + req.body.user_search + "'", function(error, users, fields) {
-            //     console.log(users, "here are the users from the query")
-            // })
-            User.find({first_name: req.body.user_search}, function(error, results) {
-                if (error) {
-                    console.log(error)
+            if(req.body.user_search.length > 2) {
+                req.body.user_search = "%" + req.body.user_search + "%"
+            }
+            connection.query("SELECT * FROM users WHERE users.first_name LIKE " + "'" + req.body.user_search + "'" + "OR users.last_name LIKE " + "'" + req.body.user_search + "'", function(error, users, fields) {
+                console.log(users, "here are the users from the query")
+                if (error){
+                    res.json(error, "error");
                 } else {
-                    console.log(results, "here in results");
+                    res.json(users);
+                    console.log(users, "users");
                 }
             })
+
+            // fucntion to use mongodb
+            // User.find({first_name: req.body.user_search}, function(error, results) {
+            //     if (error) {
+            //         console.log(error)
+            //     } else {
+            //         console.log(results, "here in results");
+            //     }
+            // })
         }
     //write next method here
     }

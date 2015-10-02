@@ -2,6 +2,7 @@ myApp.factory('UserFactory', function($http) {
 	var factory = {};
 	var current_user = {};
 	var search_text = {};
+	var search_results = {};
 	factory.addUser = function(new_user, callback) {
 		console.log('in addUser factory');
 		$http.post('/users/', new_user).then(function(response){
@@ -30,7 +31,7 @@ myApp.factory('UserFactory', function($http) {
 		console.log("in angular users factory getUserByFirstName method");
 		$http.post('/search_user/', text).then(function(response) {
 			console.log("response in the getUserbyfristNamecontroller")
-			// callback(response);
+			callback(response.data);
 		})
 	}
 	return factory;
