@@ -1,6 +1,10 @@
 // require express so that we can build an express app
 var express = require('express');
+var io = require('socket.io');
 var path = require('path');
+var formidable = require('formidable');
+var util = require('util');
+var fs = require('fs-extra');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
@@ -15,5 +19,5 @@ require('./config/routes.js')(app);
 
 
 app.listen(8000, function() {
-	console.log('Mini Store on: 8000');
+	console.log('School App on: 8000');
 });
