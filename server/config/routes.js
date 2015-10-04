@@ -5,6 +5,8 @@
 // var questions = require('/Users/Computer/Documents/Coding/full_mean/black_belt/server/controllers/questions.js');
 var users = require('/Users/Computer/Documents/Coding/Schools/Schools/server/controllers/users.js');
 var session = require('express-session');
+var formidable = require('formidable');
+var fs = require('fs-extra');
 // // var products = require('/Users/Computer/Documents/Coding/full_mean/black_belt/server/controllers/products.js');
 module.exports = function(app) {
 //     /*---------->>>>>CUSTOMERS<<<<<----------*/
@@ -19,19 +21,65 @@ module.exports = function(app) {
     	console.log(req.body);
     	users.findOne(req, res);
     })
-//     app.post('/logout', function(req, res){
-//         console.log('I am in routes and logging out');
-//         req.session.destroy();
-//     })
+    app.get('/logout', function(req, res){
+        console.log('I am in routes and logging out');
+        req.session.destroy();
+    })
     app.post('/current_user/', function(req,res){
     	req.body.user_id = req.session.user_id;
     	users.findOneById(req, res);
         // res.json(req.session.user_id);
     })
-
-    app.post('/search_user/', function(req, res) {
-    	console.log(req.body);
+    app.post('/search_user/', function(req, res){
     	users.findOneByName(req, res);
+    })
+    app.post('/add_image/', function(req, res){
+        // this seems a bit excessive to be in routes. Ask nikki about that.
+        var form = formidable.IncomingForm();
+        // This is how you use formidable;
+        var user = {};
+        form.parse(req, function(err, fields, files){
+            console.log('parsed');
+        })
+        form.on('field', function(key, value){
+            user["'"+key+"'"] = value;
+            console.log(user);
+        })
+        form.on('file', function(name, file){
+            console.log('file--->',file);
+            var temp_path = file.path;
+            var og_name = file.name;
+            var extension = og_name.split('.').pop();
+            var file_name = randomString() + "." + extension;
+            console.log(file_name);
+            var new_location = "uploads/";
+            user.photo = new_location + file_name;
+            fs.copy(temp_path, new_location + file_name, function(err){
+                if (err){
+                    console.log(err);
+                } else {
+                    console.log("successfully added user");
+                    user = {
+                        id: req.session.user_id,
+                        image: user.photo
+                    }
+                    users.insert_image(user, res);
+                }
+                res.redirect('/#/show_one');
+            })
+        })
+        function randomString(){
+            var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var charLength = characters.length;
+            randomString = ""
+            length = 14;
+            for (i=0; i < length; i++){
+                var index = Math.floor(Math.random()*charLength);
+                randomString += characters[index];
+            }
+            return randomString;
+        }
+        
     })
 // 	app.get('/questions', function(req, res){
 //         console.log('i am in routes, on my way to get questions');

@@ -1,10 +1,18 @@
 <div ng-init="uc.getCurrentUser()">
-	<h1>Welcome</h1>
-	<p>{{uc.current_user}}</p>
+	<h1>Welcome, <i>{{uc.current_user[0].first_name}}</i></h1>
+	<div ng-if="uc.current_user[0].imgurl">
+		<p>hello there</p>
+		<img ng-src={{uc.current_user[0].imgurl}} height="120" width="120" >
+	</div>
 	<label> Search for Friends: <input type="text" ng-change="uc.searchTextField()" ng-model="uc.search_text.user_search"></label>
 	<div>
 		<div ng-repeat="result in uc.search_results">
 			<p ng-bind="result.first_name"></p>
 		</div>
 	</div>
+	<h3>Upload image</h3>
+	<form action="/add_image/" enctype="multipart/form-data" method="post">
+		<input type="file" name="image">
+		<input type="submit" value="add">
+	</form>
 </div>

@@ -120,7 +120,19 @@ module.exports = (function() {
             //         console.log(results, "here in results");
             //     }
             // })
+        },
+        insert_image: function(req, res) {
+            console.log(req);
+            connection.query("UPDATE users SET imgurl =" + "'" + req.image + "'" + "WHERE id =" + "'" + req.id + "'",
+            function(error, users, first_name) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    res.json({});
+                }
+            })
         }
+
     //write next method here
     }
 })();
