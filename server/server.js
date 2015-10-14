@@ -23,3 +23,4 @@ require('./config/routes.js')(app);
 app.listen(8000, function() {
 	console.log('School App on: 8000');
 });
+console.log(varible, "string");
