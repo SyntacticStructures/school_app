@@ -9,7 +9,24 @@ var formidable = require('formidable');
 var fs = require('fs-extra');
 // // var products = require('/Users/Computer/Documents/Coding/full_mean/black_belt/server/controllers/products.js');
 module.exports = function(app) {
-//     /*---------->>>>>CUSTOMERS<<<<<----------*/
+var tickets = [
+    {
+        'title': 'The network is down!',
+        'desc': 'The network is down and I cannot perform my work'
+    },
+    {
+        'title': 'I lost my pen',
+        'desc': 'But I love you more than life itself.'
+    },
+    {
+        'title': 'PC Load Letter',
+        'desc': 'I wish I knew what it meant, but the printer is not working'
+    },
+    {
+        'title': 'My account is locked',
+        'desc': 'I know that my password was correct even though it failed.'
+    }
+];
     app.post('/users/', function(req, res){
         console.log('I am in routes and registering');
         console.log(req.body);

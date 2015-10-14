@@ -1,4 +1,4 @@
-myApp.controller('UsersController', function(UserFactory, $location, $scope) {
+myApp.controller('UsersController', 'socket' function(UserFactory, socket, $location, $scope) {
 	
 	var that = this;
 
@@ -8,6 +8,9 @@ myApp.controller('UsersController', function(UserFactory, $location, $scope) {
 		return regex.test(text);
 	}
 
+	socket.on('ticket', function(message) {
+		$scope.tickets.push(message);
+	})
 
 	this.addUser = function() {
 		var new_user = that.new_user;

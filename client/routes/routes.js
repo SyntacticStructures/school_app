@@ -8,15 +8,9 @@ myApp.config(function ($routeProvider) {
         .when('/new',{
                 templateUrl: '../partials/create.html'
         })
-        // .when('/show_one',{
-        // 		templateUrl:'../partials/create.html'
-        // })
         .when('/show_one',{
         		templateUrl:'../partials/show_one.html'
         })
-        // .when('/answer', {
-        // 		templateUrl:'../partials/answer.html'
-        // })
         .otherwise({
             redirectTo: '/'
         });
